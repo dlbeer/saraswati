@@ -319,8 +319,22 @@ namespace Saraswati.UI
 
 	    try
 	    {
+		if ((text.Length >= 2) && text[0] == '~' && text[1] == '/')
+		    text = Environment.GetEnvironmentVariable("HOME") +
+			text.Substring(1, text.Length - 1);
+		else if (text.Length == 0)
+		    text = "./";
+
 		string dirName = Path.GetDirectoryName(text);
+
+		if ((dirName == null) || (dirName == String.Empty))
+		    dirName = ".";
+
 		string prefix = Path.GetFileName(text);
+
+		if (prefix == null)
+		    prefix = string.Empty;
+
 		DirectoryInfo info = new DirectoryInfo(dirName);
 
 		foreach (DirectoryInfo dir in info.EnumerateDirectories())
