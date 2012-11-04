@@ -1,0 +1,26 @@
+Saraswati -- command-line EPUB reader
+=====================================
+
+To build this package, you will need the Mono C# compiler and the
+libncursesw (including header files).
+
+To build and install, type ``make``, followed by ``make install``.
+
+Type ``saraswati`` to run, optionally specifying a file to open on the
+command-line. Help text will be displayed if no file is specified.
+
+Features
+--------
+
+  * Supports EPUB format, and will render embedded HTML to plain text
+    (with basic formatting).
+
+  * Full-text search.
+
+  * Automatic bookmarking: a history of opened files and associated
+    cursor positions is kept. Open a previously read file, and the
+    cursor will skip to the last known position.
+
+  * Stable text reflow: when the terminal width changes, the text will
+    be reflowed while the cursor remains in the same logical position in
+    the book.
