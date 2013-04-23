@@ -242,7 +242,10 @@ namespace Saraswati.Core
 
 	    if (bulletStart)
 	    {
-		ListEnv env = stkList.Peek();
+		ListEnv env = new ListEnv(ListState.Unordered);
+
+		if (stkList.Count > 0)
+		    env = stkList.Peek();
 
 		bulletStart = false;
 
