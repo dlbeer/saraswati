@@ -45,9 +45,16 @@ namespace Saraswati.Core
 		OPFParser.ParseStream(GetContent(mpath), mpath,
 				      out Manifest, out Spine);
 
-		string tocPath = Manifest.GetById(Spine.TocId).Linkref;
+		if (Spine.TocId == null)
+		{
+		    Toc = new TableOfContents();
+		}
+		else
+		{
+		    string tocPath = Manifest.GetById(Spine.TocId).Linkref;
 
-		Toc = NCXParser.ParseStream(GetContent(tocPath), tocPath);
+		    Toc = NCXParser.ParseStream(GetContent(tocPath), tocPath);
+		}
 
 		stream = s;
 	    }
