@@ -15,7 +15,7 @@
 # TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 
-CSC ?= dmcs
+CSC ?= mcs
 TARGETS = saraswati.exe libterminal.so
 SOURCE = $(wildcard Core/*.cs UI/*.cs)
 DESTDIR ?=
@@ -38,7 +38,10 @@ install: $(TARGETS)
 	mkdir -p $(DESTDIR)$(LIBDIR)
 	install -o root -g root saraswati.exe $(DESTDIR)$(LIBDIR)
 	install -o root -g root libterminal.so $(DESTDIR)$(LIBDIR)
-	ln -sf $(LIBDIR)/saraswati.exe $(DESTDIR)$(PREFIX)/bin/saraswati
+	echo '#!/bin/sh' > $(DESTDIR)/$(PREFIX)/bin/saraswati
+	echo 'mono $(LIBDIR)/saraswati.exe "$$@"' >> \
+		$(DESTDIR)/$(PREFIX)/bin/saraswati
+	chmod 755 $(DESTDIR)/$(PREFIX)/bin/saraswati
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/saraswati
