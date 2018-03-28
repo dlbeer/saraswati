@@ -155,6 +155,15 @@ namespace Saraswati.Core
 
 	void Begin(string text, XmlReader r)
 	{
+	    ContentType ct;
+
+	    try {
+		ct = new ContentType(r.GetAttribute("media-type"));
+	    }
+	    catch (Exception) {
+		ct = new ContentType("application/octet-stream");
+	    }
+
 	    if (text.Equals("spine"))
 	    {
 		spine.TocId = r.GetAttribute("toc");
@@ -164,7 +173,7 @@ namespace Saraswati.Core
 		manf.Add(new OPFManifest.Item(
 		    r.GetAttribute("id"),
 		    EPath.RelPath(basePath, r.GetAttribute("href")),
-		    new ContentType(r.GetAttribute("media-type"))));
+		    ct));
 	    else if (text.Equals("itemref") && (depSpine > 0))
 		spine.Add(r.GetAttribute("idref"));
 	}
