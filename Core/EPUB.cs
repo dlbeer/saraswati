@@ -58,10 +58,10 @@ namespace Saraswati.Core
 
 		stream = s;
 	    }
-	    catch (Exception ex)
+	    catch (Exception)
 	    {
 		s.Dispose();
-		throw ex;
+		throw;
 	    }
 	}
 
